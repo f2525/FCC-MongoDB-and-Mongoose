@@ -1,9 +1,29 @@
 require('dotenv').config();
-let mongoose = require("mongoose")
+let mongoose = require("mongoose");
+var Schema = mongoose.Schema;
 
+//connect to our mongooseDB Atlas with environment variable as the URI
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-let Person;
+//defining our Person Schema
+const personSchema = new Schema({
+  name: {type: String, required: true},
+  age: Number,
+  favoriteFoods: [String]
+})
+//convert our personSchema into a model
+let Person = mongoose.model("Person", personSchema);
+
+//create a person model
+const PersonBaru = function(done) {
+  new Person({
+    name: "Budiman Asik",
+    age: 32,
+    favoriteFoods: ["Satay", "Mie"]
+  });
+  if (error) return done(error);
+  done(null, result);
+};
 
 const createAndSavePerson = (done) => {
   done(null /*, data*/);
