@@ -23,8 +23,8 @@ const createAndSavePerson = (done) => {
   });
   
   Francesca.save(function(err,data){
-    if (error){
-      console.log(error)
+    if (err){
+      console.log(err)
     }
     else{
       done(null, data)
